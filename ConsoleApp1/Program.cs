@@ -10,5 +10,6 @@ internal class Program
         x = Increament(x);
         Console.WriteLine($"x is {x}");
         Student student = new();
+        Console.WriteLine("hello world");
     }
 }
