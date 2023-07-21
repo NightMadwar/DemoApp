@@ -2,10 +2,10 @@
 {
     public class Helper
     {
-        public static int Increment(ref int Num)
+        public static void Increment(int Num, out int result)
         {
-             Num = 10;
-            return Num;
+            
+            result = Num + 10;            
         }
     }
 }
