@@ -101,8 +101,7 @@ public static class Filter
                 {
                     arr.Add(record);
                 }
-            }    
-            arr.Print();
+            }                
         }
         return arr;
 
