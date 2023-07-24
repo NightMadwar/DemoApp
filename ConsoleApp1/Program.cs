@@ -2,10 +2,12 @@
 using IUST;
 using System.Runtime.CompilerServices;
 #nullable disable
-internal class Program
+public class Program
 {
+    
     private static void Main()
     {
+
         //int x = 5;
         //Console.WriteLine("Enter a Num");
         //x = int.Parse(Console.ReadLine()!);
@@ -21,12 +23,12 @@ internal class Program
 
         List<Employee> employees = new List<Employee>()
         {
-            new Employee{Id = 1, Name ="Maher",Description="professor",IsManager=true},
-            new Employee{Id = 2, Name ="Yousef",Description="Student",IsManager=true},
-            new Employee{Id = 3, Name ="Wissam",Description="dancer",IsManager=false},
-            new Employee{Id = 4, Name ="Adnan",Description="doctor",IsManager=false},
-            new Employee{Id = 5, Name ="Adnan",Description="doctor",IsManager=false},
-            new Employee{Id = 6, Name ="Adnan",Description="doctor",IsManager=false},
+            new Employee{Id = 1, Name ="Maher",Description="professor",Salary=1000,Dept=Department.FullStack,IsManager=true},
+            new Employee{Id = 2, Name ="Yousef",Description="Student",Salary=1000,Dept=Department.BackEnd,IsManager=true},
+            new Employee{Id = 3, Name ="Wissam",Description="Worker",Salary=1000,Dept=Department.FrontEnd,IsManager=true},            
+            new Employee{Id = 4, Name ="Abd",Description="Intern",Salary=600,Dept=Department.FullStack,IsManager=false},
+            new Employee{Id = 5, Name ="Bilal",Description="doctor",IsManager=false},
+            new Employee{Id = 6, Name ="Samer",Description="doctor",IsManager=false}
         };
         //List<Employee> FilteredEmp = employees.Filtering(a => a.IsManager == true);
         //foreach (Employee emp in FilteredEmp)
@@ -34,24 +36,36 @@ internal class Program
         //    emp.SetInfo();
         //    Console.WriteLine();
         //}
-        employees.Filtering(e => e.IsManager == true).Print();
+        employees.Filtering(e => e.Salary> 500 && e.Dept == Department.FullStack);
 
-        List<Employee> filtered = employees.Filtering(e =>e.IsManager == false);
-        filtered.Print();
+        //List<Employee> filtered = employees.Filtering(e =>e.IsManager == false);
+        //filtered.Print();
     }
     
+}
+public enum Department
+{
+    FullStack,
+    FrontEnd,
+    BackEnd,
+    HR
 }
 public class Employee
 {
     public int Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
+    public Department Dept { get; set; }
+    public int Salary { get; set; }
     public bool IsManager { get; set; }
+
     public void SetInfo()
     {
         Console.WriteLine($"id = {Id}");
         Console.WriteLine($"Name = {Name}");
         Console.WriteLine($"Description = {Description}");
+        Console.WriteLine($"Dept = {Dept}");
+        Console.WriteLine($"Salary = {Salary}");
         Console.WriteLine($"Is Manager = {IsManager}");
     }
 }
@@ -87,7 +101,8 @@ public static class Filter
                 {
                     arr.Add(record);
                 }
-            }            
+            }    
+            arr.Print();
         }
         return arr;
 
@@ -99,6 +114,7 @@ public static class Filter
             foreach( T record in records)
             {
                 ((Employee) (object)record).SetInfo();
+                Console.WriteLine();
             }
         }
         else
